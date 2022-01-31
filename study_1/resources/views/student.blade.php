@@ -32,6 +32,14 @@
                     <td>{{$item->age}}</td>
                     <td>{{$item->major}}</td>
                     <td>{{$item->class}}</td>
+                    <td>
+                        <a href="{{route('student.edit', $item->id)}}" class="btn btn-sm btn-success mb-2">Edit</a>
+                        <form action="{{route('student.destroy', $item->id)}}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

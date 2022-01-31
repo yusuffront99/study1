@@ -70,7 +70,11 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Student::findOrFail($id);
+
+        return view('Student.edit', [
+            'item'=> $item
+        ]);
     }
 
     /**
@@ -82,7 +86,11 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $item = Student::findOrFail($id);
+        $item->update($data);
+
+        return redirect()->route('student.index')->with('success', 'Data updated Successfully');
     }
 
     /**
@@ -93,6 +101,9 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Student::findOrFail($id);
+        $item->delete();
+
+        return redirect()->route('student.index')->with('success', 'Data Deleted Successfully');
     }
 }
