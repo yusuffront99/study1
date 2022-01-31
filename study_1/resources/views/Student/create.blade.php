@@ -13,6 +13,10 @@
             <form action="{{route('student.store')}}" method="POST">
                 @csrf
                 <div class="form-group col-sm-6">
+                    <label for="npm">Npm</label>
+                    <input type="text" name="npm" class="form-control" id="npm" aria-describedby="npmHelp" placeholder="Enter npm">
+                </div>
+                <div class="form-group col-sm-6">
                     <label for="name">Name</label>
                     <input type="text" name="name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Enter name">
                 </div>

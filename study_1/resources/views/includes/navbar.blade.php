@@ -13,10 +13,10 @@
                 <a class="nav-link" href="{{route('student.index')}}">Student</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Study</a>
+                <a class="nav-link" href="{{route('study.index')}}">Study</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
+                <a class="nav-link" href="#">Disabled</a>
             </li>
             </ul>
         </div>

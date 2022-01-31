@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Student;
 use App\Models\Study;
+use App\Models\Student;
 
-class StudentController extends Controller
+class StudyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $items = Student::all();
-
-        return view('student', [
+        $items = Study::with(['student'])->get();
+        return view('study', [
             'items' => $items
         ]);
     }
@@ -29,7 +28,10 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('Student.create');
+        $items = Student::get();
+        return view('Study.create', [
+            'items' => $items
+        ]);
     }
 
     /**
@@ -41,16 +43,13 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'npm' => 'required',
-            'name' => 'required',
-            'age' => 'required',
-            'major' => 'required',
-            'class' => 'required'
+            'student_id' => 'required|unique:studies,student_id',
+            'modul' => 'required',
+            'grade' => 'required'
         ]);
 
-        Student::create($request->all());
-
-        return redirect()->route('student.index')->with('success', 'Data saved Successfully');
+        Study::create($request->all());
+        return redirect()->route('study.index')->with('success', 'Data saved Successfully');
     }
 
     /**
@@ -61,7 +60,7 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -72,10 +71,12 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        $item = Student::findOrFail($id);
+        $item = Study::findOrFail($id);
+        $students = Student::all();
 
-        return view('Student.edit', [
-            'item'=> $item
+        return view('Study.edit', [
+            'item' => $item,
+            'students' => $students
         ]);
     }
 
@@ -89,10 +90,10 @@ class StudentController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $item = Student::findOrFail($id);
+        $item = Study::findOrFail($id);
         $item->update($data);
 
-        return redirect()->route('student.index')->with('success', 'Data updated Successfully');
+        return redirect()->route('study.index')->with('success', 'Data updated Successfully');
     }
 
     /**
@@ -103,9 +104,9 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        $item = Student::findOrFail($id);
+        $item = Study::findOrFail($id);
         $item->delete();
 
-        return redirect()->route('student.index')->with('success', 'Data Deleted Successfully');
+        return redirect()->route('study.index')->with('success', 'Data Deleted Successfully');
     }
 }
