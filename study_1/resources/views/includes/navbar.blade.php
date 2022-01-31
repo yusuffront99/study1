@@ -16,7 +16,7 @@
                 <a class="nav-link" href="{{route('study.index')}}">Study</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Disabled</a>
+                <a class="nav-link" href="{{route('gallery.index')}}">Galleries</a>
             </li>
             </ul>
         </div>

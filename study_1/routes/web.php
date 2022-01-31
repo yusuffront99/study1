@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudyController;
@@ -19,3 +20,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 Route::resource('/student', StudentController::class);
 Route::resource('/study', StudyController::class);
+Route::resource('/gallery', GalleryController::class);
