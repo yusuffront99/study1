@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Student;
 
 class StudentController extends Controller
 {
@@ -13,7 +14,11 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return view('Home');
+        $items = Student::all();
+
+        return view('student', [
+            'items' => $items
+        ]);
     }
 
     /**
@@ -23,7 +28,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view('Student.create');
     }
 
     /**
@@ -34,7 +39,16 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'age' => 'required',
+            'major' => 'required',
+            'class' => 'required'
+        ]);
+
+        Student::create($request->all());
+
+        return redirect()->route('student.index')->with('success', 'Data saved Successfully');
     }
 
     /**
