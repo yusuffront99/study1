@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\GalleryRequest;
 use App\Models\Gallery;
 use App\Models\Student;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
@@ -71,7 +72,10 @@ class GalleryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Gallery::findOrFail($id);
+        return view('Gallery.edit', [
+            'item' => $item
+        ]);
     }
 
     /**
@@ -81,9 +85,19 @@ class GalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(GalleryRequest $request, $id)
     {
-        //
+        $data = $request->all();
+        if($request->file('image')){
+            Storage::delete($request->oldImage);
+        }
+        $data['image'] = $request->file('image')->store('assets/gallery');
+
+        $item = Gallery::findOrFail($id);
+        $item->update($data);
+
+        return redirect()->route('gallery.index')->with('success', 'Data updated Successfully');
+
     }
 
     /**

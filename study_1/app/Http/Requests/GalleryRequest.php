@@ -24,7 +24,7 @@ class GalleryRequest extends FormRequest
     public function rules()
     {
         return [
-            'student_id' => 'required|unique:galleries,student_id',
+            'student_id' => 'required',
             'image' => 'required|max:3000|mimes:png,jpg,jpeg'
         ];
     }
