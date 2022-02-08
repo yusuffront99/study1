@@ -15,8 +15,8 @@ class HomePage extends StatelessWidget {
               ),
               Image.asset(
                 'assets/images/profile1.png',
-                width: 100,
                 height: 100,
+                width: 100,
               ),
               SizedBox(
                 height: 20,
@@ -36,6 +36,62 @@ class HomePage extends StatelessWidget {
                 style: TextStyle(
                   color: lightblueColor,
                   fontSize: 16,
+                ),
+              ),
+
+              //========= BODY
+              SizedBox(
+                height: 30,
+              ),
+              Container(
+                width: double.infinity,
+                height: 300,
+                padding: EdgeInsets.all(30),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(40))),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Friends',
+                      style: titleTextStyle,
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      children: [
+                        Image.asset(
+                          'assets/images/profile2.png',
+                          width: 55,
+                          height: 55,
+                        ),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Andreas',
+                              style: titleTextStyle,
+                            ),
+                            Text(
+                              'Hello, my name is andreas',
+                              style: subtitleTextStyle,
+                            )
+                          ],
+                        ),
+                        Spacer(),
+                        Text(
+                          'now',
+                          style: subtitleTextStyle,
+                        )
+                      ],
+                    )
+                  ],
                 ),
               ),
             ],
